@@ -1,0 +1,1172 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    font-family: 'Poppins',sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* ======== Global Colors ========   */
+:root{
+    --blue: #2a2185;
+    --white: #fff;
+    --gray: #f5f5f5;
+    --black1: #222;
+    --black2: #999;
+}
+body{
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ========== Navigation CSS Start ===========  */
+
+/* =============== Sidebar =============== */
+.sidebar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 350px;
+    background-color: var(--blue);
+    transition: all .5s ease;
+    z-index: 100;
+}
+.sidebar.close{
+    width: 80px;
+}
+
+/* --------- Logo ------------ */
+.logo-box{
+    height: 60px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    transition: all .5s ease;
+}
+.logo-box i{
+    font-size: 30px;
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+    transition: all .5s ease;
+}
+.sidebar.close .logo-box i{
+    transform: rotate(360deg);
+}
+.logo-box .logo-name img{
+    position: relative;
+    width: 140px;
+    height: 50px;
+    margin-top: 16px;
+}
+/* ---------- Sidebar List ---------- */
+.sidebar-list{
+    height: 100%;
+    padding: 30px 0 150px 0;
+    overflow: auto;
+}
+.sidebar-list::-webkit-scrollbar{
+    display: none;
+}
+.sidebar-list li{
+    transition: all .5s ease;
+}
+.sidebar-list li:hover{
+    background-color: var(--blue);
+}
+.sidebar-list li .title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all .5s ease;
+    cursor: pointer;
+}
+.sidebar-list li.active .title{
+    background-color: var(--blue);
+}
+.sidebar-list li.active .bxs-chevron-down{
+    transition: all .5s ease;
+    transform: rotate(180deg);
+}
+.sidebar-list li .title .link{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+.sidebar-list li .title i{
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
+    color: var(--white);
+    font-size: 20px;
+}
+.sidebar-list li .title .name{
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--white);
+}
+
+/* ---------------- Submenu ------------- */
+.sidebar-list li .submenu{
+    width: 0;
+    height: 0;
+    opacity: 0;
+    transition: all .5s ease;
+}
+.sidebar-list li.dropdown.active .submenu{
+    width: unset;
+    height: unset;
+    opacity: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 6px 6px 14px 80px;
+    background-color: var(--blue);
+}
+.submenu .link{
+    color: var(--white);
+    font-size: 15px;
+    padding: 5px 0;
+    transition: all .5s ease;
+}
+.submenu .link:hover{
+    color: #fff;
+}
+.submenu-title{
+    display: none;
+}
+
+/* ---------------- Submenu Close ------------- */
+.sidebar.close .logo-name,
+.sidebar.close .title .name,
+.sidebar.close .title .bxs-chevron-down
+{
+    display: none;
+}
+
+.sidebar.close .sidebar-list{
+    overflow: visible;
+}
+.sidebar.close .sidebar-list li{
+    position: relative;
+}
+.sidebar.close .sidebar-list li .submenu{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 100%;
+    top: -10px;
+    margin-top: 0;
+    padding: 10px 20px;
+    border-radius: 0 6px 6px 0;
+    height: max-content;
+    width: max-content;
+    opacity: 0;
+    transition: all .5s ease;
+    pointer-events: none;
+}
+.sidebar.close .sidebar-list li:hover .submenu{
+    opacity: 1;
+    top: 0;
+    pointer-events: initial;
+    background-color: var(--blue);
+}
+.sidebar.close .submenu-title{
+    display: block;
+    font-style: 18px;
+    color: var(--white);
+}
+
+/* ========== Navigation CSS End ===========  */
+
+/* =========== Main CSS Start ============ */
+
+.main-div{
+    position: absolute;
+    width: calc(100% - 80px);
+    left: 80px;
+    min-height: 100vh;
+    background: var(--white);
+    transition: 0.5s;
+}
+.main-div.active{
+    width: calc(100% - 350px);
+    left: 350px;
+}
+.topbar{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    background: var(--blue);
+    color: var(--white);
+}
+.toggle-sidebar{
+    position: relative;
+    width: 60px;
+    height: 60px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+.user{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer;
+    right: 22px;
+
+}
+.user img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.sub-menu-wrap{
+    position: absolute;
+    top: 60px;
+    right: 30px;
+    width: 320px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.5s;
+    border-radius: 10px;
+    z-index: 1000;
+}
+.sub-menu-wrap.open-menu{
+    max-height: 400px;
+}
+.sub-menu{
+    background: var(--blue);
+    padding: 20px;
+    margin: 10px;
+}
+.user-info{
+    display: flex;
+    align-items: center;
+}
+.user-info h2{
+    font-weight: 500;
+    color: var(--white);
+    font-size: 25px;
+}
+.user-info img{
+    width: 55px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+.sub-menu hr{
+    border: 0;
+    height: 1px;
+    width: 100%;
+    background: var(--white);
+}
+.sub-menu-link{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--white);
+    margin: 12px 0;
+}
+.sub-menu-link p{
+    width: 100%;
+    margin-top: 16px;
+}
+.sub-menu-link ion-icon{
+    width: 40px;
+    padding: 8px;
+    margin-right: 15px;
+    font-size: 30px;
+
+}
+.sub-menu-link:hover ion-icon{
+    color: var(--white);
+}
+.sub-menu-link span{
+    font-size: 22px;
+    transition: transform 0.5s;
+}
+.sub-menu-link:hover span{
+    transform: translateX(5px);
+    color: var(--white);
+}
+.sub-menu-link:hover p{
+    font-weight: 600;
+    color: var(--white);
+}
+
+/* =========== Main CSS End ============ */
+
+/* =========== Cards CSS Start ============ */
+
+.cardBox-1{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+.cardBox-1 .card-1{
+    position: relative;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+}
+.cardBox-1 .card-1 .numbers{
+    position: relative;
+    font-weight: 500;
+    font-size: 2.5rem;
+    color: var(--blue);
+}
+.cardBox-1 .card-1 .cardName-1{
+    color: var(--black2);
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+.cardBox-1 .card-1 .iconBx-1{
+    font-size: 3.5rem;
+    color: var(--black2);
+}
+.cardBox-1 .card-1:hover{
+    background: var(--blue);
+}
+.cardBox-1 .card-1:hover .numbers, .cardBox-1 .card-1:hover .cardName-1, .cardBox-1 .card-1:hover .iconBx-1{
+    color: var(--white);
+}
+
+/* =========== Cards CSS End ============ */
+
+.user-list{
+    width: 100%;
+    height: 100%;
+    margin: 50px;
+}
+.user-list .heading{
+    display: flex;
+    justify-content: space-between;
+    color: var(--blue);
+}
+.user-list .heading .btn-add-user{
+    background: transparent;
+    border: 1px solid var(--blue);
+    color: var(--blue);
+}
+.user-list .heading .btn-add-user:hover{
+    background: var(--blue);
+    color: var(--white);
+}
+.table-div{
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+.table-div .table thead tr{
+    background: var(--blue);
+    color: var(--white);
+    text-transform: uppercase;
+}
+
+/* =========== Order Detail List Css Start ============ */
+
+.details{
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    /* margin-top: 10px; */
+}
+.details .recentOrders{
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    background: var(--white);
+    padding: 20px;
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+.details .cardHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.cardHeader h2{
+    font-weight: 600;
+    color: var(--blue);
+}
+.cardHeader .btn{
+    position: relative;
+    padding: 5px 10px;
+    background: var(--blue);
+    text-decoration: none;
+    color: var(--white);
+    border-radius: 6px;
+}
+.details table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.details table thead td{
+    font-weight: 600;
+}
+.details .recentOrders table tr{
+    color: var(--black1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.details .recentOrders table tr:last-child{
+    border-bottom: none;
+}
+.details .recentOrders table tbody tr:hover{
+    background: var(--blue);
+    color: var(--white);
+}
+.details .recentOrders table thead tr td{
+    padding: 22px;
+}
+.details .recentOrders table tr td{
+    padding: 10px;
+}
+.details .recentOrders table tr td:last-child{
+    text-align: center;
+}
+.details .recentOrders table tr td:nth-child(2){
+    text-align: center;
+}
+.details .recentOrders table tr td:nth-child(3){
+    text-align: center;
+}
+.bg-clour{
+    background: var(--blue);
+    
+}
+.bg-clour td{
+    color: var(--white);
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.status.delivered{
+    padding: 2px 4px;
+    background: #8de02c;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.status.pending{
+    padding: 2px 4px;
+    background: #e9b10a;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.status.return{
+    padding: 2px 4px;
+    background: #f00;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+.status.inProgress{
+    padding: 2px 4px;
+    background: #1795ce;
+    color: var(--white);
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* =========== Order Detail List Css End ============ */
+
+/* =========== Recent Customers Css Start ============ */
+
+.recentCustomers{
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    padding: 20px;
+    background: var(--white);
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+.recentCustomers .imgBx{
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    overflow: hidden;
+}
+.recentCustomers .imgBx img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.recentCustomers table tr td{
+    padding: 12px 10px;
+}
+.recentCustomers table tr td h4{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2rem;
+}
+.recentCustomers table tr td h4 span{
+    font-size: 14px;
+    color: var(--black2);
+}
+.recentCustomers table tr:hover{
+    background: var(--blue);
+    color: var(--white);
+}
+.recentCustomers table tr:hover td h4 span{
+    color: var(--white);
+}
+
+/* =========== Recent Customers Css End ============ */
+
+/* =========== Footer Css Start ============ */
+
+footer {
+    background-color: var(--blue);
+    color: #fff;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .container-new {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .container-new p {
+    margin: 0;
+  }
+  
+  .container-new p:first-child {
+    float: left;
+  }
+  
+  .container-new p:last-child {
+    float: right;
+  }
+
+/* =========== Footer Css End ============ */
+
+/* =========== Resposive Design Css Start ============ */
+
+@media only screen and (min-width: 300px) and (max-width: 570px){
+    .main-div.active {
+        width: calc(100% - 0px);
+        left: 0px;
+    }
+    .main-div{
+        width: calc(100% - 0px);
+        left: 0px;
+    }
+    .sidebar.close {
+        width: 0px;
+    }
+    .sidebar-list li .title .link{
+        text-decoration: none;
+    }
+    .cardBox-1{
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .details{
+        display: block;
+        grid-template-columns: none;
+    }
+    .cardHeader h2{
+        font-size: 14px;
+    }
+    .details .recentOrders{
+        margin-bottom: 20px;
+        display: block;
+    }
+    .details .cardHeader{
+        justify-content: space-around;
+    }
+    .cardHeader .btn{
+        padding: 2px 5px;
+        font-size: 10px;
+    }
+    .details .recentOrders table thead tr td{
+        font-size: 10px;
+        padding: 12px;
+    }
+    .details .recentOrders table tr td{
+        font-size: 10px;
+        padding: 2px;
+    }
+    .btn-edit{
+        width: 30px;
+        padding: 3px;
+        font-size: 14px;
+        padding-left: 5px;
+        margin-right: 0px;
+    }
+    .btn-delete{
+        width: 30px;
+        padding: 3px;
+        font-size: 14px;
+        padding-left: 3px;
+        margin-top: 4px;
+    }
+    .status.delivered{
+        font-size: 10px;
+    }
+    .status.pending{
+        font-size: 10px;
+    }
+    .status.return{
+        font-size: 10px;
+    }
+    .status.inProgress{
+        font-size: 10px;
+    }
+    .recentCustomers table tr td h4{
+        font-size: 10px;
+    }
+    .recentCustomers table tr td h4 span{
+        font-size: 10px;
+    }
+    .container-new p:first-child{
+        font-size: 12px;
+        text-align: center;
+        float: none;
+    }
+    .container-new p:last-child{
+        font-size: 12px;
+        text-align: center;
+        margin-top: 10px;
+        float: none;
+    }
+    .toggle-sidebar{
+        display: none;
+    }
+    .profile-image-container{
+        height: 370px !important;
+        width: 314px !important;
+        margin-left: -14px;
+    }
+    .profile-image-container-2{
+        height: 370px !important;
+        width: 314px !important;
+        margin-left: -14px;
+    }
+    .profile-image-container-3{
+        height: 370px !important;
+        width: 314px !important;
+        margin-left: -14px;
+    }
+    .form-mar .button{
+        display: flex;
+        gap: 10px;
+    }
+    .form-mar input[type="submit"]{
+        width: 35% !important;
+        font-size: 14px !important;
+    }
+    .form-mar .button-btn{
+        font-size: 14px !important;
+        padding: 7px 20px !important;
+    }
+    .sidebar.close .sidebar-list{
+        overflow: hidden !important;
+    }
+
+}
+@media only screen and (min-width: 571px) and (max-width: 1023px){
+    .cardBox-1{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .cardHeader h2{
+        font-size: 18px;
+    }
+    .details{
+        display: block;
+    }
+    .profile-image-container{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .profile-image-container-2{
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .profile-image-container-3{
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1400px){
+    .details{
+        display: block;
+    }
+    .cardBox-1{
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+/* =========== Resposive Design Css End ============ */
+
+/* =========== My Profile Section Css Start ============= */
+.profile-container{
+    width: 100%;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    margin-bottom: 80px;
+    display: flex;
+    justify-content: space-between;
+  }
+.profile-image-container{
+    margin-top: 30px;
+    height: 350px;
+    width: 400px;
+}
+.profile-image-container .wrapper{
+    position: relative;
+    height: 300px;
+    width: 100%;
+    border-radius: 10px;
+    background: #fff;
+    border: 2px dashed var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.wrapper .pro-image{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrapper .pro-image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.wrapper .icon{
+    font-size: 100px;
+    color: var(--blue);
+    margin-left: 48px;
+}
+.wrapper .text{
+    font-size: 20px;
+    font-weight: 600;
+    color: #5B5B7B;
+}
+.wrapper #cancel-btn{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+    display: none;
+}
+.wrapper .file-name{
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    padding: 8px 0;
+    font-size: 18px;
+    background: var(--blue);
+    display: none;
+}
+.wrapper .file-name.active{
+    display: block;
+}
+.wrapper.active{
+    border: none;
+}
+.wrapper.active:hover #cancel-btn{
+    display: block;
+}
+.wrapper #cancel-btn:hover{
+    color: #e74c3c;
+}
+.wrapper.active:hover .file-name.active{
+    display: block;
+}
+.profile-image-container #custom-btn{
+    margin-top: 30px;
+    width: 100%;
+    height: 50px;
+    display: block;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: var(--blue);
+}
+.profile-image-container-2{
+    margin-top: 30px;
+    height: 350px;
+    width: 400px;
+}
+.profile-image-container-2 .wrapper-2{
+    position: relative;
+    height: 300px;
+    width: 100%;
+    border-radius: 10px;
+    background: #fff;
+    border: 2px dashed var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.wrapper-2 .pro-image-2{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrapper-2 .pro-image-2 img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.wrapper-2 .icon-2{
+    font-size: 100px;
+    color: var(--blue);
+    margin-left: 48px;
+}
+.wrapper-2 .text-2{
+    font-size: 20px;
+    font-weight: 600;
+    color: #5B5B7B;
+}
+.wrapper-2 #cancel-btn-2{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+    display: none;
+}
+.wrapper-2 .file-name-2{
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    padding: 8px 0;
+    font-size: 18px;
+    background: var(--blue);
+    display: none;
+}
+.wrapper-2 .file-name-2.active-2{
+    display: block;
+}
+.wrapper-2.active-2{
+    border: none;
+}
+.wrapper-2.active-2:hover #cancel-btn-2{
+    display: block;
+}
+.wrapper-2 #cancel-btn-2:hover{
+    color: #e74c3c;
+}
+.wrapper-2.active-2:hover .file-name-2.active-2{
+    display: block;
+}
+.profile-image-container-2 #custom-btn-2{
+    margin-top: 30px;
+    width: 100%;
+    height: 50px;
+    display: block;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: var(--blue);
+}
+.profile-image-container-3{
+    margin-top: 30px;
+    height: 350px;
+    width: 400px;
+}
+.profile-image-container-3 .wrapper-3{
+    position: relative;
+    height: 300px;
+    width: 100%;
+    border-radius: 10px;
+    background: #fff;
+    border: 2px dashed var(--blue);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.wrapper-3 .pro-image-3{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrapper-3 .pro-image-3 img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.wrapper-3 .icon-3{
+    font-size: 100px;
+    color: var(--blue);
+    margin-left: 48px;
+}
+.wrapper-3 .text-3{
+    font-size: 20px;
+    font-weight: 600;
+    color: #5B5B7B;
+}
+.wrapper-3 #cancel-btn-3{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #fff;
+    display: none;
+}
+.wrapper-3 .file-name-3{
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    padding: 8px 0;
+    font-size: 18px;
+    background: var(--blue);
+    display: none;
+}
+.wrapper-3 .file-name-3.active-3{
+    display: block;
+}
+.wrapper-3.active-3{
+    border: none;
+}
+.wrapper-3.active-3:hover #cancel-btn-3{
+    display: block;
+}
+.wrapper-3 #cancel-btn-3:hover{
+    color: #e74c3c;
+}
+.wrapper-3.active-3:hover .file-name-3.active-3{
+    display: block;
+}
+.profile-image-container-3 #custom-btn-3{
+    margin-top: 30px;
+    width: 100%;
+    height: 50px;
+    display: block;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    background: var(--blue);
+}
+
+/* =========== My Profile Section Css End ============= */
+
+.form-mar{
+    margin-bottom: 110px;
+}
+.form-mar input[type="submit"]{
+    width: 30%;
+    font-size: 22px;
+    padding: 6px;
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.form-mar .button-btn{
+    font-size: 22px;
+    padding: 7px 42px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* ============= multiple image css ============== */
+.image-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+    margin-top: 50px;
+  }
+  
+  .file-label {
+    display: block;
+    background-color: var(--blue);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  #file-input {
+    display: none;
+  }
+  
+  .image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    gap: 10px;
+  }
+  
+  .preview-container {
+    position: relative;
+  }
+  
+  .preview-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .preview-image:hover {
+    transform: scale(1.05);
+  }
+  
+  .remove-image {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .preview-container:hover .remove-image {
+    opacity: 1;
+  }
+
+  /* ============= Color Swicther Css Start ====================  */
+
+  .color-swicther{
+    position: fixed;
+    top: 70px;
+    right: -200px;
+    width: 200px;
+    padding: 10px;
+    background: white;
+    z-index: 1000;
+    transition: 0.5s;
+  }
+  .color-swicther.active{
+    right: 0px;
+    transition: 0.5s;
+  }
+  .color-swicther h3{
+    color: var(--blue);
+    font-size: 20px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #3333;
+    padding: 5px 0;
+    text-align: center;
+  }
+  .color-swicther .swicther-btn{
+    position: absolute;
+    top: 0;
+    left: -70px;
+    color: var(--blue);
+    background: var(--white);
+    padding: 6px 20px;
+    cursor: pointer;
+    font-size: 35px;
+  }
+  .color-swicther .swicther-btn i{
+    animation: rotate 2s linear infinite;
+  }
+  @keyframes rotate {
+    100%{
+        transform: rotate(360deg);
+    }
+  }
+  .color-swicther .theme-buttons-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .color-swicther .theme-buttons-container .theme-buttons{
+    display: block;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    margin: 5px;
+    cursor: pointer;
+  }
+
+  /* ============= Color Swicther Css End ====================  */
